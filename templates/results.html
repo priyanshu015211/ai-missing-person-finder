@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>📸 Search for a Missing Person</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Upload their photo</label>
+        <input type="file" name="photo" accept=".png,.jpg,.jpeg" required>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{% if matches %}
+<div class="card">
+    <h3>Possible Matches</h3>
+    {% for m in matches %}
+    <div class="match">
+        <img src="{{ m.photo_path }}" alt="{{ m.name }}">
+        <div>
+            <div><strong>{{ m.name }}</strong></div>
+            <div>Camp: {{ m.camp_location }}</div>
+            <div>Logged: {{ m.date_logged }}</div>
+            <div class="confidence">Confidence: {{ m.confidence }}%</div>
+        </div>
+    </div>
+    {% endfor %}
+    <p style="margin-top:16px; font-size:13px; color:#666;">⚠️ These are AI-suggested matches only. A human coordinator must verify identity in person before any reunification.</p>
+</div>
+{% elif request.method == "POST" %}
+<div class="card"><p>No matches found in the current camp database.</p></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>🏕️ Log a Photo at a Relief Camp</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Camp / Shelter Location</label>
+        <input type="text" name="camp_location" required>
+
+        <label>Photo</label>
+        <input type="file" name="photo" accept=".png,.jpg,.jpeg" required>
+
+        <div class="consent-box">
+            <input type="checkbox" name="consent" id="consent" required>
+            <label for="consent" style="margin:0;">This person has given consent for their photo to be used for reunification matching.</label>
+        </div>
+
+        <button type="submit">Log Photo</button>
+    </form>
+</div>
+{% endblock %}

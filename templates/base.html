@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Missing Person Finder{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; background: #f7f7f8; color: #1a1a1a; }
+        header { margin-bottom: 30px; }
+        header h1 { font-size: 22px; }
+        nav a { margin-right: 16px; color: #2563eb; text-decoration: none; font-weight: 600; }
+        nav a:hover { text-decoration: underline; }
+        .card { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        label { display: block; margin-top: 14px; font-weight: 600; font-size: 14px; }
+        input[type=text], input[type=file] { width: 100%; padding: 8px; margin-top: 6px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { margin-top: 20px; padding: 10px 18px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 15px; }
+        button:hover { background: #1d4ed8; }
+        .flash { background: #fef3c7; border: 1px solid #f59e0b; padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+        .match { display: flex; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .match img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; }
+        .confidence { font-weight: 700; color: #059669; }
+        .consent-box { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔍 AI-Powered Missing Person Finder</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('search') }}">Search for Someone</a>
+            <a href="{{ url_for('camp_upload') }}">Log Camp Photo</a>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
